@@ -1,3 +1,49 @@
+// 두번째 풀이. 문자 하나씩 탐색하면서 스테이지 별 값 계산.
+
+func solution(_ dartResult:String) -> Int {
+    
+    var num: [Int] = []
+    
+    var startIdx = dartResult.startIndex
+    for i in dartResult.indices {
+        switch(dartResult[i]) {
+        case "S":
+            if let v = Int(dartResult[startIdx..<i]) {
+                num.append(v)
+            }
+            startIdx = dartResult.index(after: i)
+        case "D":
+            if let v = Int(dartResult[startIdx..<i]) {
+                num.append(v * v)
+            }
+            startIdx = dartResult.index(after: i)
+        case "T":
+            if let v = Int(dartResult[startIdx..<i]) {
+                num.append(v * v * v)
+            }
+            startIdx = dartResult.index(after: i)
+        case "*":
+            if num.count >= 1 {
+                num[num.count - 1] *= 2
+                if num.count >= 2 {
+                    num[num.count - 2] *= 2
+                }
+            }
+            startIdx = dartResult.index(after: i)
+        case "#":
+            num[num.count - 1] *= -1
+            startIdx = dartResult.index(after: i)
+        default: break
+        }
+    }
+    
+    return num.reduce(0, +)
+    
+}
+
+
+// 처음 푼 풀이 -> 스트링을 다 나누고 탐색했음. 매우 비효율.
+
 
 func solution(_ dartResult:String) -> Int {
     // ex) 1S2D*3T, 1S*2T*3S
