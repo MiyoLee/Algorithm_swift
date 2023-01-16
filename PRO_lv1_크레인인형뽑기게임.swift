@@ -10,13 +10,14 @@ func solution(_ board:[[Int]], _ moves:[Int]) -> Int {
         var i = 0
         while i < board.count {
             if boardCopy[i][m-1] > 0 {
-                if boardCopy[i][m-1] == basket.last {   //터진다
+                let item = boardCopy[i][m-1]    //뽑는다
+                boardCopy[i][m-1] = 0
+                if item == basket.last {   //터진다
                     answer += 2
                     basket.removeLast()
                 } else {
-                    basket.append(boardCopy[i][m-1])    //넣는다
+                    basket.append(item)    //넣는다
                 }
-                boardCopy[i][m-1] = 0   //뽑는다
                 break
             }
             i += 1
