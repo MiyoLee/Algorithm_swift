@@ -27,3 +27,24 @@ func solution(_ s:String) -> [Int] {
     
     return result
 }
+
+// 좀더 축약한 버전
+func solution2(_ s:String) -> [Int] {
+    var result: [Int] = []
+    
+    var str = s
+    str.removeFirst(2)
+    str.removeLast(2)
+    
+    str.components(separatedBy: "},{").map{$0.split(separator: ",").map{Int($0)!}}
+        .sorted(by: {$0.count < $1.count})
+        .forEach({
+            $0.forEach({
+                if !result.contains($0) {
+                    result.append($0)
+                }
+            })
+        })
+    
+    return result
+}
