@@ -65,10 +65,7 @@ func isConvertable(_ str1:String, _ str2:String) -> Bool {
             return false
         }
     }
-    if diff == 0 {
-        return false
-    }
-    return true
+    return diff == 1
 }
 
 print(solution("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]))
